@@ -1,0 +1,9 @@
+_e = int(input("Nhập số e: "))
+_f = int(input("Nhập số f: "))
+_g = int(input("Nhập số g: "))
+_h = _e + _f + _g
+_i = _e * _f * _g
+_k = _e - _f
+_l = _e / _f
+_m = _e // _f
+_n = _e % _f
