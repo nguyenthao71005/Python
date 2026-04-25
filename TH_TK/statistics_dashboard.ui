@@ -1,0 +1,893 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1280</width>
+    <height>760</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Thống kê doanh thu</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow, QWidget {
+    background-color: #f4f7fb;
+    color: #1f2937;
+    font-family: "Segoe UI";
+    font-size: 11pt;
+}
+QFrame#menuFrame {
+    background-color: #16324f;
+    border-radius: 18px;
+    border: 1px solid #274d74;
+}
+QFrame#contentFrame {
+    background-color: #ffffff;
+    border-radius: 20px;
+    border: 1px solid #dbe4f0;
+}
+QLabel#menuTitleLabel {
+    color: #ffffff;
+    font-size: 20pt;
+    font-weight: 700;
+}
+QLabel#menuHintLabel {
+    color: #d7e4f3;
+    background-color: #21486f;
+    border-radius: 12px;
+    padding: 12px;
+}
+QListWidget#statisticsListWidget {
+    background-color: transparent;
+    border: none;
+    color: #e5eef8;
+    outline: 0;
+    padding: 4px;
+}
+QListWidget#statisticsListWidget::item {
+    background-color: transparent;
+    border-radius: 12px;
+    padding: 12px 14px;
+    margin: 4px 0px;
+}
+QListWidget#statisticsListWidget::item:selected {
+    background-color: #f59e0b;
+    color: #0f172a;
+    font-weight: 700;
+}
+QListWidget#statisticsListWidget::item:hover {
+    background-color: #244f79;
+}
+QLabel#mainTitleLabel {
+    color: #0f172a;
+    font-size: 22pt;
+    font-weight: 700;
+}
+QLabel#titleMonthLabel, QLabel#titleYearLabel, QLabel#titleQuarterLabel,
+QLabel#titleCategoryLabel, QLabel#titleLocationLabel, QLabel#titleProfitMonthLabel,
+QLabel#titleTopProductsLabel, QLabel#titleSegmentLabel, QLabel#titleRegionProfitLabel,
+QLabel#titleDiscountProfitLabel, QLabel#titleShippingStatusLabel {
+    color: #102a43;
+    font-size: 16pt;
+    font-weight: 700;
+}
+QLabel#descMonthLabel, QLabel#descYearLabel, QLabel#descQuarterLabel,
+QLabel#descCategoryLabel, QLabel#descLocationLabel, QLabel#descProfitMonthLabel,
+QLabel#descTopProductsLabel, QLabel#descSegmentLabel, QLabel#descRegionProfitLabel,
+QLabel#descDiscountProfitLabel, QLabel#descShippingStatusLabel {
+    color: #52667a;
+    background-color: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 10px 12px;
+}
+QFrame#chartMonthFrame, QFrame#chartYearFrame, QFrame#chartQuarterFrame,
+QFrame#chartCategoryFrame, QFrame#chartLocationFrame, QFrame#chartProfitMonthFrame,
+QFrame#chartTopProductsFrame, QFrame#chartSegmentFrame, QFrame#chartRegionProfitFrame,
+QFrame#chartDiscountProfitFrame, QFrame#chartShippingStatusFrame {
+    background-color: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+}
+QLabel#chartMonthPlaceholder, QLabel#chartYearPlaceholder, QLabel#chartQuarterPlaceholder,
+QLabel#chartCategoryPlaceholder, QLabel#chartLocationPlaceholder, QLabel#chartProfitMonthPlaceholder,
+QLabel#chartTopProductsPlaceholder, QLabel#chartSegmentPlaceholder, QLabel#chartRegionProfitPlaceholder,
+QLabel#chartDiscountProfitPlaceholder, QLabel#chartShippingStatusPlaceholder {
+    color: #7b8794;
+    font-size: 12pt;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <property name="spacing">
+     <number>16</number>
+    </property>
+    <property name="leftMargin">
+     <number>16</number>
+    </property>
+    <property name="topMargin">
+     <number>16</number>
+    </property>
+    <property name="rightMargin">
+     <number>16</number>
+    </property>
+    <property name="bottomMargin">
+     <number>16</number>
+    </property>
+    <item>
+     <widget class="QFrame" name="menuFrame">
+      <property name="minimumSize">
+       <size>
+        <width>280</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>320</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayoutMenu">
+       <property name="spacing">
+        <number>12</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="menuTitleLabel">
+         <property name="font">
+          <font>
+           <pointsize>16</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Danh mục thống kê</string>
+         </property>
+         <property name="alignment">
+          <set>Qt::AlignCenter</set>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="menuHintLabel">
+         <property name="text">
+          <string>Chọn một mục bên dưới để xem biểu đồ ở khung bên phải.</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QListWidget" name="statisticsListWidget">
+         <property name="currentRow">
+          <number>0</number>
+         </property>
+         <item>
+          <property name="text">
+           <string>Doanh thu theo tháng</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Doanh thu theo năm</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Doanh thu theo quý</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Doanh thu các loại mặt hàng</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Doanh thu theo vị trí địa lý</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Lợi nhuận theo tháng</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Top 10 sản phẩm theo doanh thu</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Doanh thu theo phân khúc khách hàng</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Doanh thu và lợi nhuận theo khu vực</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Ảnh hưởng giảm giá đến lợi nhuận</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Thống kê trạng thái giao hàng</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QFrame" name="contentFrame">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayoutContent">
+       <property name="spacing">
+        <number>12</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="mainTitleLabel">
+         <property name="font">
+          <font>
+           <pointsize>18</pointsize>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="text">
+          <string>Bảng điều khiển thống kê doanh thu</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="dashboardInfoLabel">
+         <property name="text">
+          <string>Chọn một thống kê ở bên trái để xem biểu đồ chi tiết, so sánh và xu hướng dữ liệu bán hàng.</string>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: #eef4ff;
+border: 1px solid #c8dafc;
+border-radius: 14px;
+padding: 12px;
+color: #26415e;</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QStackedWidget" name="statisticsStackedWidget">
+         <property name="currentIndex">
+          <number>0</number>
+         </property>
+         <widget class="QWidget" name="pageMonth">
+          <layout class="QVBoxLayout" name="verticalLayoutMonth">
+           <item>
+            <widget class="QLabel" name="titleMonthLabel">
+             <property name="font">
+              <font>
+               <pointsize>15</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Doanh thu theo tháng</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="descMonthLabel">
+             <property name="text">
+              <string>Khung này dùng để hiển thị biểu đồ doanh thu theo từng tháng.</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="chartMonthFrame">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayoutMonthFrame">
+              <item>
+               <widget class="QLabel" name="chartMonthPlaceholder">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>420</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Vùng hiển thị biểu đồ doanh thu theo tháng</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="pageYear">
+          <layout class="QVBoxLayout" name="verticalLayoutYear">
+           <item>
+            <widget class="QLabel" name="titleYearLabel">
+             <property name="font">
+              <font>
+               <pointsize>15</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Doanh thu theo năm</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="descYearLabel">
+             <property name="text">
+              <string>Khung này dùng để hiển thị biểu đồ doanh thu theo từng năm.</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="chartYearFrame">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayoutYearFrame">
+              <item>
+               <widget class="QLabel" name="chartYearPlaceholder">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>420</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Vùng hiển thị biểu đồ doanh thu theo năm</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="pageQuarter">
+          <layout class="QVBoxLayout" name="verticalLayoutQuarter">
+           <item>
+            <widget class="QLabel" name="titleQuarterLabel">
+             <property name="font">
+              <font>
+               <pointsize>15</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Doanh thu theo quý</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="descQuarterLabel">
+             <property name="text">
+              <string>Khung này dùng để hiển thị biểu đồ doanh thu theo từng quý.</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="chartQuarterFrame">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayoutQuarterFrame">
+              <item>
+               <widget class="QLabel" name="chartQuarterPlaceholder">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>420</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Vùng hiển thị biểu đồ doanh thu theo quý</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="pageCategory">
+          <layout class="QVBoxLayout" name="verticalLayoutCategory">
+           <item>
+            <widget class="QLabel" name="titleCategoryLabel">
+             <property name="font">
+              <font>
+               <pointsize>15</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Doanh thu các loại mặt hàng</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="descCategoryLabel">
+             <property name="text">
+              <string>Khung này dùng để hiển thị biểu đồ doanh thu theo loại mặt hàng.</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="chartCategoryFrame">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayoutCategoryFrame">
+              <item>
+               <widget class="QLabel" name="chartCategoryPlaceholder">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>420</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Vùng hiển thị biểu đồ doanh thu các loại mặt hàng</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="pageLocation">
+          <layout class="QVBoxLayout" name="verticalLayoutLocation">
+           <item>
+            <widget class="QLabel" name="titleLocationLabel">
+             <property name="font">
+              <font>
+               <pointsize>15</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Doanh thu theo vị trí địa lý</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="descLocationLabel">
+             <property name="text">
+              <string>Khung này dùng để hiển thị biểu đồ doanh thu theo khu vực hoặc địa phương.</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="chartLocationFrame">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayoutLocationFrame">
+              <item>
+               <widget class="QLabel" name="chartLocationPlaceholder">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>420</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Vùng hiển thị biểu đồ doanh thu theo vị trí địa lý</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="pageProfitMonth">
+          <layout class="QVBoxLayout" name="verticalLayoutProfitMonth">
+           <item>
+            <widget class="QLabel" name="titleProfitMonthLabel">
+             <property name="font">
+              <font>
+               <pointsize>15</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Lợi nhuận theo tháng</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="descProfitMonthLabel">
+             <property name="text">
+              <string>Khung này dùng để hiển thị xu hướng lợi nhuận theo từng tháng.</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="chartProfitMonthFrame">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayoutProfitMonthFrame">
+              <item>
+               <widget class="QLabel" name="chartProfitMonthPlaceholder">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>420</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Vùng hiển thị biểu đồ lợi nhuận theo tháng</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="pageTopProducts">
+          <layout class="QVBoxLayout" name="verticalLayoutTopProducts">
+           <item>
+            <widget class="QLabel" name="titleTopProductsLabel">
+             <property name="font">
+              <font>
+               <pointsize>15</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Top 10 sản phẩm theo doanh thu</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="descTopProductsLabel">
+             <property name="text">
+              <string>Khung này dùng để hiển thị những sản phẩm tạo ra doanh thu cao nhất.</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="chartTopProductsFrame">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayoutTopProductsFrame">
+              <item>
+               <widget class="QLabel" name="chartTopProductsPlaceholder">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>420</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Vùng hiển thị top 10 sản phẩm theo doanh thu</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="pageSegment">
+          <layout class="QVBoxLayout" name="verticalLayoutSegment">
+           <item>
+            <widget class="QLabel" name="titleSegmentLabel">
+             <property name="font">
+              <font>
+               <pointsize>15</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Doanh thu theo phân khúc khách hàng</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="descSegmentLabel">
+             <property name="text">
+              <string>Khung này dùng để so sánh doanh thu giữa các phân khúc khách hàng.</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="chartSegmentFrame">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayoutSegmentFrame">
+              <item>
+               <widget class="QLabel" name="chartSegmentPlaceholder">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>420</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Vùng hiển thị doanh thu theo phân khúc khách hàng</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="pageRegionProfit">
+          <layout class="QVBoxLayout" name="verticalLayoutRegionProfit">
+           <item>
+            <widget class="QLabel" name="titleRegionProfitLabel">
+             <property name="font">
+              <font>
+               <pointsize>15</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Doanh thu và lợi nhuận theo khu vực</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="descRegionProfitLabel">
+             <property name="text">
+              <string>Khung này dùng để so sánh doanh thu và lợi nhuận giữa các khu vực.</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="chartRegionProfitFrame">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayoutRegionProfitFrame">
+              <item>
+               <widget class="QLabel" name="chartRegionProfitPlaceholder">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>420</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Vùng hiển thị doanh thu và lợi nhuận theo khu vực</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="pageDiscountProfit">
+          <layout class="QVBoxLayout" name="verticalLayoutDiscountProfit">
+           <item>
+            <widget class="QLabel" name="titleDiscountProfitLabel">
+             <property name="font">
+              <font>
+               <pointsize>15</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Ảnh hưởng giảm giá đến lợi nhuận</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="descDiscountProfitLabel">
+             <property name="text">
+              <string>Khung này dùng để quan sát mối liên hệ giữa mức giảm giá và lợi nhuận trung bình.</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="chartDiscountProfitFrame">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayoutDiscountProfitFrame">
+              <item>
+               <widget class="QLabel" name="chartDiscountProfitPlaceholder">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>420</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Vùng hiển thị ảnh hưởng giảm giá đến lợi nhuận</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QWidget" name="pageShippingStatus">
+          <layout class="QVBoxLayout" name="verticalLayoutShippingStatus">
+           <item>
+            <widget class="QLabel" name="titleShippingStatusLabel">
+             <property name="font">
+              <font>
+               <pointsize>15</pointsize>
+               <bold>true</bold>
+              </font>
+             </property>
+             <property name="text">
+              <string>Thống kê trạng thái giao hàng</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="descShippingStatusLabel">
+             <property name="text">
+              <string>Khung này dùng để thống kê số đơn theo trạng thái giao hàng và thời gian giao trung bình.</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QFrame" name="chartShippingStatusFrame">
+             <property name="frameShape">
+              <enum>QFrame::StyledPanel</enum>
+             </property>
+             <layout class="QVBoxLayout" name="verticalLayoutShippingStatusFrame">
+              <item>
+               <widget class="QLabel" name="chartShippingStatusPlaceholder">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>420</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>Vùng hiển thị thống kê trạng thái giao hàng</string>
+                </property>
+                <property name="alignment">
+                 <set>Qt::AlignCenter</set>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1280</width>
+     <height>26</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>statisticsListWidget</sender>
+   <signal>currentRowChanged(int)</signal>
+   <receiver>statisticsStackedWidget</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>113</x>
+     <y>253</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>889</x>
+     <y>357</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
