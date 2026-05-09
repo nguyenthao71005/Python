@@ -1,0 +1,724 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>NhatKyWindow</class>
+ <widget class="QMainWindow" name="NhatKyWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1120</width>
+    <height>720</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Nhật ký cá nhân</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QMainWindow {
+    background: #f4f6f8;
+}
+QWidget {
+    font-family: Segoe UI, Arial;
+    font-size: 13px;
+    color: #20242a;
+}
+QGroupBox {
+    border: 1px solid #cfd7df;
+    border-radius: 8px;
+    margin-top: 12px;
+    background: #ffffff;
+    font-weight: 600;
+}
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 12px;
+    padding: 0 6px;
+}
+QLineEdit, QTextEdit, QPlainTextEdit, QComboBox, QDateEdit, QSpinBox {
+    border: 1px solid #c9d1d9;
+    border-radius: 6px;
+    padding: 6px;
+    background: #ffffff;
+}
+QPushButton {
+    background: #256f65;
+    color: #ffffff;
+    border: 0;
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-weight: 600;
+}
+QPushButton:hover {
+    background: #1f5f57;
+}
+QPushButton#btnDeleteEntry {
+    background: #b74d46;
+}
+QPushButton#btnDeleteEntry:hover {
+    background: #983e39;
+}
+QTabWidget::pane {
+    border: 1px solid #cfd7df;
+    background: #ffffff;
+}
+QTabBar::tab {
+    background: #e8edf2;
+    padding: 10px 18px;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+QTabBar::tab:selected {
+    background: #ffffff;
+    color: #256f65;
+    font-weight: 600;
+}
+QListWidget, QTableWidget {
+    border: 1px solid #cfd7df;
+    border-radius: 6px;
+    background: #ffffff;
+    alternate-background-color: #f7f9fb;
+}
+QHeaderView::section {
+    background: #edf1f5;
+    border: 0;
+    border-right: 1px solid #d8e0e7;
+    padding: 6px;
+    font-weight: 600;
+}</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="mainLayout">
+    <property name="leftMargin">
+     <number>16</number>
+    </property>
+    <property name="topMargin">
+     <number>14</number>
+    </property>
+    <property name="rightMargin">
+     <number>16</number>
+    </property>
+    <property name="bottomMargin">
+     <number>14</number>
+    </property>
+    <item>
+     <widget class="QLabel" name="lblAppTitle">
+      <property name="font">
+       <font>
+        <pointsize>18</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="text">
+       <string>Nhật ký cá nhân</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="lblAppSubtitle">
+      <property name="text">
+       <string>Ghi lại sự kiện hằng ngày, xem thống kê và nhắc lại kỷ niệm theo năm, quý, tháng.</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tabWrite">
+       <attribute name="title">
+        <string>Viết nhật ký</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="writeLayout">
+        <item>
+         <widget class="QGroupBox" name="groupEntryList">
+          <property name="minimumSize">
+           <size>
+            <width>310</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="title">
+           <string>Danh sách bài viết</string>
+          </property>
+          <layout class="QVBoxLayout" name="entryListLayout">
+           <item>
+            <widget class="QLineEdit" name="lineSearch">
+             <property name="placeholderText">
+              <string>Tìm theo tiêu đề, nội dung, từ khóa...</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="filterLayout">
+             <item>
+              <widget class="QComboBox" name="comboFilterYear">
+               <item>
+                <property name="text">
+                 <string>Tất cả năm</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item>
+              <widget class="QComboBox" name="comboFilterQuarter">
+               <item>
+                <property name="text">
+                 <string>Tất cả quý</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Quý 1</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Quý 2</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Quý 3</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Quý 4</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QListWidget" name="listEntries">
+             <property name="alternatingRowColors">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QGroupBox" name="groupEditor">
+          <property name="title">
+           <string>Nội dung nhật ký</string>
+          </property>
+          <layout class="QVBoxLayout" name="editorLayout">
+           <item>
+            <layout class="QFormLayout" name="entryFormLayout">
+             <property name="labelAlignment">
+              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+             </property>
+             <item row="0" column="0">
+              <widget class="QLabel" name="lblDate">
+               <property name="text">
+                <string>Ngày viết</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QDateEdit" name="dateEditEntry">
+               <property name="calendarPopup">
+                <bool>true</bool>
+               </property>
+               <property name="displayFormat">
+                <string>dd/MM/yyyy</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="lblTitle">
+               <property name="text">
+                <string>Tiêu đề</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineTitle">
+               <property name="placeholderText">
+                <string>Ví dụ: Một ngày đáng nhớ</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="lblMood">
+               <property name="text">
+                <string>Tâm trạng</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QComboBox" name="comboMood">
+               <item>
+                <property name="text">
+                 <string>Bình thường</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Vui</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Hạnh phúc</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Buồn</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Lo lắng</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Tức giận</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Biết ơn</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="3" column="0">
+              <widget class="QLabel" name="lblTags">
+               <property name="text">
+                <string>Từ khóa</string>
+               </property>
+              </widget>
+             </item>
+             <item row="3" column="1">
+              <widget class="QLineEdit" name="lineTags">
+               <property name="placeholderText">
+                <string>Gia đình, học tập, công việc...</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item>
+            <widget class="QPlainTextEdit" name="textEditContent">
+             <property name="placeholderText">
+              <string>Viết nhật ký của bạn tại đây...</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <layout class="QHBoxLayout" name="buttonLayout">
+             <item>
+              <widget class="QPushButton" name="btnNewEntry">
+               <property name="text">
+                <string>Tạo mới</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="buttonSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnDeleteEntry">
+               <property name="text">
+                <string>Xóa bài</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnSaveEntry">
+               <property name="text">
+                <string>Lưu nhật ký</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabStats">
+       <attribute name="title">
+        <string>Thống kê</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="statsLayout">
+        <item>
+         <widget class="QGroupBox" name="groupStatsOverview">
+          <property name="title">
+           <string>Tổng quan</string>
+          </property>
+          <layout class="QGridLayout" name="overviewGrid">
+           <item row="0" column="0">
+            <widget class="QLabel" name="lblStatsYearTitle">
+             <property name="text">
+              <string>Năm thống kê</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="comboStatsYear"/>
+           </item>
+           <item row="0" column="2">
+            <widget class="QPushButton" name="btnRefreshStats">
+             <property name="text">
+              <string>Cập nhật thống kê</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="lblTotalEntriesTitle">
+             <property name="text">
+              <string>Tổng số bài</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QLabel" name="lblTotalEntries">
+             <property name="text">
+              <string>0</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QLabel" name="lblTotalWordsTitle">
+             <property name="text">
+              <string>Tổng số từ</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="3">
+            <widget class="QLabel" name="lblTotalWords">
+             <property name="text">
+              <string>0</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="lblCurrentYearTitle">
+             <property name="text">
+              <string>Bài trong năm nay</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1">
+            <widget class="QLabel" name="lblCurrentYearEntries">
+             <property name="text">
+              <string>0</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="2">
+            <widget class="QLabel" name="lblCurrentQuarterTitle">
+             <property name="text">
+              <string>Bài trong quý hiện tại</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="3">
+            <widget class="QLabel" name="lblCurrentQuarterEntries">
+             <property name="text">
+              <string>0</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0">
+            <widget class="QLabel" name="lblDaysWrittenTitle">
+             <property name="text">
+              <string>Số ngày đã viết</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="1">
+            <widget class="QLabel" name="lblDaysWritten">
+             <property name="text">
+              <string>0</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="2">
+            <widget class="QLabel" name="lblLastWrittenTitle">
+             <property name="text">
+              <string>Lần viết gần nhất</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="3">
+            <widget class="QLabel" name="lblLastWritten">
+             <property name="text">
+              <string>Chưa có dữ liệu</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0">
+            <widget class="QLabel" name="lblMostActiveMonthTitle">
+             <property name="text">
+              <string>Tháng viết nhiều nhất</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="1" colspan="3">
+            <widget class="QLabel" name="lblMostActiveMonth">
+             <property name="text">
+              <string>Chưa có dữ liệu</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="statsTablesLayout">
+          <item>
+           <widget class="QGroupBox" name="groupQuarterStats">
+            <property name="title">
+             <string>Thống kê theo quý</string>
+            </property>
+            <layout class="QVBoxLayout" name="quarterStatsLayout">
+             <item>
+              <widget class="QTableWidget" name="tableQuarterStats">
+               <property name="alternatingRowColors">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupMonthStats">
+            <property name="title">
+             <string>Thống kê theo tháng</string>
+            </property>
+            <layout class="QVBoxLayout" name="monthStatsLayout">
+             <item>
+              <widget class="QTableWidget" name="tableMonthStats">
+               <property name="alternatingRowColors">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupMoodStats">
+            <property name="title">
+             <string>Thống kê tâm trạng</string>
+            </property>
+            <layout class="QVBoxLayout" name="moodStatsLayout">
+             <item>
+              <widget class="QTableWidget" name="tableMoodStats">
+               <property name="alternatingRowColors">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tabRecall">
+       <attribute name="title">
+        <string>Nhắc lại quá khứ</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="recallLayout">
+        <item>
+         <widget class="QGroupBox" name="groupRecallFilter">
+          <property name="title">
+           <string>Bộ lọc kỷ niệm</string>
+          </property>
+          <layout class="QGridLayout" name="recallFilterGrid">
+           <item row="0" column="0">
+            <widget class="QLabel" name="lblRecallMode">
+             <property name="text">
+              <string>Kiểu nhắc lại</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="comboRecallMode">
+             <item>
+              <property name="text">
+               <string>Theo năm</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Theo quý</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Theo tháng</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Cùng ngày các năm trước</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QLabel" name="lblRecallYear">
+             <property name="text">
+              <string>Năm</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="3">
+            <widget class="QSpinBox" name="spinRecallYear">
+             <property name="minimum">
+              <number>1900</number>
+             </property>
+             <property name="maximum">
+              <number>2100</number>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="lblRecallQuarter">
+             <property name="text">
+              <string>Quý</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="comboRecallQuarter">
+             <item>
+              <property name="text">
+               <string>Quý 1</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Quý 2</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Quý 3</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Quý 4</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QLabel" name="lblRecallMonth">
+             <property name="text">
+              <string>Tháng</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="3">
+            <widget class="QSpinBox" name="spinRecallMonth">
+             <property name="minimum">
+              <number>1</number>
+             </property>
+             <property name="maximum">
+              <number>12</number>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="4" rowspan="2">
+            <layout class="QVBoxLayout" name="recallButtonLayout">
+             <item>
+              <widget class="QPushButton" name="btnFindRecall">
+               <property name="text">
+                <string>Tìm kỷ niệm</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="btnRandomRecall">
+               <property name="text">
+                <string>Nhắc ngẫu nhiên</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="recallContentLayout">
+          <item>
+           <widget class="QGroupBox" name="groupRecallList">
+            <property name="minimumSize">
+             <size>
+              <width>330</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="title">
+             <string>Danh sách kỷ niệm</string>
+            </property>
+            <layout class="QVBoxLayout" name="recallListLayout">
+             <item>
+              <widget class="QListWidget" name="listRecall">
+               <property name="alternatingRowColors">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="groupRecallDetail">
+            <property name="title">
+             <string>Nội dung được nhắc lại</string>
+            </property>
+            <layout class="QVBoxLayout" name="recallDetailLayout">
+             <item>
+              <widget class="QPlainTextEdit" name="textRecallDetail">
+               <property name="readOnly">
+                <bool>true</bool>
+               </property>
+               <property name="placeholderText">
+                <string>Chọn một kỷ niệm để xem lại nội dung.</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

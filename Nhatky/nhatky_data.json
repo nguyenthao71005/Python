@@ -1,0 +1,22 @@
+[
+  {
+    "id": "20260506103753145853",
+    "date": "2026-05-06",
+    "title": "Họ và tên",
+    "mood": "Bình thường",
+    "tags": "T",
+    "content": "Nguyễn Phương Thảo",
+    "created_at": "2026-05-06T10:37:53",
+    "updated_at": "2026-05-06T10:37:53"
+  },
+  {
+    "id": "20260506103844095354",
+    "date": "2025-05-06",
+    "title": "Lớp",
+    "mood": "Bình thường",
+    "tags": "L",
+    "content": "DCCNTT14.2",
+    "created_at": "2026-05-06T10:38:44",
+    "updated_at": "2026-05-06T10:38:44"
+  }
+]

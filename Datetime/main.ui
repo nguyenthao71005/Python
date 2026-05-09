@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>DateTimeWindow</class>
+ <widget class="QMainWindow" name="DateTimeWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1120</width>
+    <height>760</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>940</width>
+    <height>640</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Ứng dụng thời gian, lịch và nhắc lịch</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="mainLayout">
+    <property name="leftMargin">
+     <number>16</number>
+    </property>
+    <property name="topMargin">
+     <number>16</number>
+    </property>
+    <property name="rightMargin">
+     <number>16</number>
+    </property>
+    <property name="bottomMargin">
+     <number>12</number>
+    </property>
+    <item>
+     <layout class="QVBoxLayout" name="headerLayout">
+      <item>
+       <widget class="QLabel" name="appTitleLabel">
+        <property name="text">
+         <string>Ứng dụng thời gian, lịch và nhắc lịch</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="appSubtitleLabel">
+        <property name="text">
+         <string>Xem giờ hiện tại, chuyển đổi múi giờ, xem lịch và đặt nhắc sự kiện theo thời gian.</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+    <item>
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="clockTab">
+       <attribute name="title">
+        <string>Giờ &amp; múi giờ</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="clockTabLayout">
+        <item>
+         <layout class="QHBoxLayout" name="clockCardsLayout">
+          <item>
+           <widget class="QGroupBox" name="localTimeGroup">
+            <property name="title">
+             <string>Thời gian địa phương</string>
+            </property>
+            <layout class="QVBoxLayout" name="localTimeLayout">
+             <item>
+              <widget class="QLabel" name="localTimeLabel">
+               <property name="text">
+                <string>--:--:--</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="localDateLabel">
+               <property name="text">
+                <string>--/--/----</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="localZoneLabel">
+               <property name="text">
+                <string>Địa phương: --</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="localDetailLabel">
+               <property name="text">
+                <string>UTC | Tuần | Ngày trong năm</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item>
+           <widget class="QGroupBox" name="selectedTimeGroup">
+            <property name="title">
+             <string>Thời gian theo múi giờ</string>
+            </property>
+            <layout class="QVBoxLayout" name="selectedTimeLayout">
+             <item>
+              <layout class="QHBoxLayout" name="timezoneControlLayout">
+               <item>
+                <widget class="QLineEdit" name="zoneSearchEdit"/>
+               </item>
+               <item>
+                <widget class="QComboBox" name="timezoneCombo">
+                 <property name="minimumWidth">
+                  <number>260</number>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QPushButton" name="copyLocalToZoneButton">
+                 <property name="text">
+                  <string>Dùng giờ địa phương</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </item>
+             <item>
+              <widget class="QLabel" name="selectedTimeLabel">
+               <property name="text">
+                <string>--:--:--</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="selectedDateLabel">
+               <property name="text">
+                <string>--/--/----</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QLabel" name="selectedZoneDetailLabel">
+               <property name="text">
+                <string>Múi giờ | UTC | Chênh lệch</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <spacer name="clockBottomSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="calendarTab">
+       <attribute name="title">
+        <string>Lịch</string>
+       </attribute>
+       <layout class="QHBoxLayout" name="calendarTabLayout">
+        <item>
+         <widget class="QGroupBox" name="calendarControlGroup">
+          <property name="title">
+           <string>Tùy chọn lịch</string>
+          </property>
+          <property name="maximumWidth">
+           <number>330</number>
+          </property>
+          <layout class="QFormLayout" name="calendarFormLayout">
+           <item row="0" column="0">
+            <widget class="QLabel" name="calendarTypeTextLabel">
+             <property name="text">
+              <string>Bộ lịch</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="calendarTypeCombo"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="firstDayTextLabel">
+             <property name="text">
+              <string>Ngày đầu tuần</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="firstDayCombo"/>
+           </item>
+           <item row="2" column="0" colspan="2">
+            <widget class="QCheckBox" name="gridCheckBox">
+             <property name="text">
+              <string>Hiển thị lưới lịch</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0" colspan="2">
+            <widget class="QCheckBox" name="navigationCheckBox">
+             <property name="text">
+              <string>Hiển thị thanh chuyển tháng</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0" colspan="2">
+            <widget class="QPushButton" name="todayButton">
+             <property name="text">
+              <string>Về hôm nay</string>
+             </property>
+            </widget>
+           </item>
+           <item row="5" column="0" colspan="2">
+            <widget class="QLabel" name="calendarSelectedLabel">
+             <property name="text">
+              <string>Ngày chọn: --</string>
+             </property>
+             <property name="wordWrap">
+              <bool>true</bool>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QCalendarWidget" name="calendarWidget"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="eventTab">
+       <attribute name="title">
+        <string>Nhắc lịch</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="eventTabLayout">
+        <item>
+         <widget class="QGroupBox" name="eventFormGroup">
+          <property name="title">
+           <string>Đặt lịch sự kiện</string>
+          </property>
+          <layout class="QGridLayout" name="eventFormLayout">
+           <item row="0" column="0">
+            <widget class="QLabel" name="eventTitleLabel">
+             <property name="text">
+              <string>Sự kiện</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLineEdit" name="eventTitleEdit"/>
+           </item>
+           <item row="0" column="2">
+            <widget class="QLabel" name="eventDateTimeLabel">
+             <property name="text">
+              <string>Thời gian</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="3">
+            <widget class="QDateTimeEdit" name="eventDateTimeEdit"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="eventZoneLabel">
+             <property name="text">
+              <string>Múi giờ</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="eventZoneCombo"/>
+           </item>
+           <item row="1" column="2">
+            <widget class="QLabel" name="eventNoteLabel">
+             <property name="text">
+              <string>Ghi chú</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="3">
+            <widget class="QTextEdit" name="eventNoteEdit">
+             <property name="maximumHeight">
+              <number>80</number>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1" colspan="3">
+            <layout class="QHBoxLayout" name="eventButtonLayout">
+             <item>
+              <widget class="QPushButton" name="addEventButton">
+               <property name="text">
+                <string>Thêm lịch nhắc</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="completeEventButton">
+               <property name="text">
+                <string>Đánh dấu đã xong</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="deleteEventButton">
+               <property name="text">
+                <string>Xóa sự kiện</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="eventButtonSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <widget class="QTableWidget" name="eventTable"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="optionTab">
+       <attribute name="title">
+        <string>Tùy chọn</string>
+       </attribute>
+       <layout class="QVBoxLayout" name="optionTabLayout">
+        <item>
+         <widget class="QGroupBox" name="timeOptionGroup">
+          <property name="title">
+           <string>Cấu hình hiển thị giờ và lịch</string>
+          </property>
+          <layout class="QFormLayout" name="optionFormLayout">
+           <item row="0" column="0">
+            <widget class="QLabel" name="timeFormatLabel">
+             <property name="text">
+              <string>Định dạng giờ</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QComboBox" name="timeFormatCombo"/>
+           </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="dateFormatLabel">
+             <property name="text">
+              <string>Định dạng ngày</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="1">
+            <widget class="QComboBox" name="dateFormatCombo"/>
+           </item>
+           <item row="2" column="0" colspan="2">
+            <widget class="QCheckBox" name="showSecondsCheckBox">
+             <property name="text">
+              <string>Hiển thị giây</string>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="0" colspan="2">
+            <widget class="QCheckBox" name="showDateCheckBox">
+             <property name="text">
+              <string>Hiển thị ngày tháng</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="0" colspan="2">
+            <widget class="QCheckBox" name="autoUpdateCheckBox">
+             <property name="text">
+              <string>Tự động cập nhật thời gian</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <spacer name="optionSpacer">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLabel" name="statusLabel">
+      <property name="text">
+       <string>Sẵn sàng</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
